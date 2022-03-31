@@ -13,4 +13,8 @@ import lombok.Setter;
 @Setter
 public class AuthRoleInsert {
 
+	private String roleName;
+	private String roleCode;
+	private String roleDesc;
+
 }

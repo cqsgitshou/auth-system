@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.auth.service.web.dao.AuthRoleMapper">
 
-    <insert id="insert" parameterType="com.auth.service.web.model.po.AuthRolePO" keyProperty="role_id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.auth.service.web.model.po.AuthRolePO" keyProperty="roleId" useGeneratedKeys="true">
         INSERT INTO auth_role
             (role_name,role_code,role_desc,create_time,
              update_time,del_flag)
