@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: auth-service-system
+    alias: 资源认证系统
+
+  profiles:
+    active: dev
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.2.129:8847
+        group: zimocloud
+        file-extension: yaml
+        namespace: ${spring.profiles.active}
+        username: zimocloud
+        password: Zimocloud123

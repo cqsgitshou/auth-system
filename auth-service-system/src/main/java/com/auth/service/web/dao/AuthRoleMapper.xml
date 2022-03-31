@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.auth.service.web.dao.AuthRoleMapper">
+
+    <insert id="insert" parameterType="com.auth.service.web.model.po.AuthRolePO" keyProperty="role_id" useGeneratedKeys="true">
+        INSERT INTO auth_role
+            (role_name,role_code,role_desc,create_time,
+             update_time,del_flag)
+        VALUES (
+            #{roleName,jdbcType=VARCHAR},
+            #{roleCode,jdbcType=VARCHAR},
+            #{roleDesc,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{delFlag,jdbcType=CHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.auth.service.web.model.po.AuthRolePO">
+        UPDATE auth_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null">
+                role_code = #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                role_desc = #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+        </set>
+        WHERE role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+
+    <select id="queryByID" parameterType="Integer" resultType="com.auth.service.web.model.dto.AuthRoleDetail">
+        SELECT role_id AS roleId,
+               role_name AS roleName,
+               role_code AS roleCode,
+               role_desc AS roleDesc,
+               create_time AS createTime,
+               update_time AS updateTime,
+               del_flag AS delFlag
+          FROM auth_role
+         WHERE role_id = #{roleId,jdbcType=INTEGER}
+    </select>
+
+    <select id="list" resultType="com.auth.service.web.model.dto.AuthRoleBrief">
+        SELECT role_id AS roleId,
+               role_name AS roleName,
+               role_code AS roleCode,
+               role_desc AS roleDesc,
+               create_time AS createTime,
+               update_time AS updateTime,
+               del_flag AS delFlag
+          FROM auth_role
+    </select>
+
+
+    <select id="findRolesByUserId" parameterType="Integer" resultType="com.auth.service.web.model.po.AuthRolePO">
+         SELECT
+            r.*
+        FROM
+        auth_role r, auth_user_role ur WHERE r.role_id = ur.role_id AND r.del_flag = 0 and  ur.user_id IN (#{userId})
+    </select>
+</mapper>

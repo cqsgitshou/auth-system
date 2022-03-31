@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.auth.service.web.dao.OauthClientDetailsMapper">
+
+    <insert id="insert" parameterType="com.auth.service.web.model.po.OauthClientDetailsPO" keyProperty="clientId" useGeneratedKeys="true">
+        INSERT INTO auth_oauth_client_details
+            (client_id,resource_ids,client_secret,`scope`,authorized_grant_types,
+             web_server_redirect_uri,authorities,access_token_validity,refresh_token_validity,additional_information,
+             autoapprove)
+        VALUES (
+           #{clientId,jdbcType=VARCHAR},
+            #{resourceIds,jdbcType=VARCHAR},
+            #{clientSecret,jdbcType=VARCHAR},
+            #{scope,jdbcType=VARCHAR},
+            #{authorizedGrantTypes,jdbcType=VARCHAR},
+            #{webServerRedirectUri,jdbcType=VARCHAR},
+            #{authorities,jdbcType=VARCHAR},
+            #{accessTokenValidity,jdbcType=INTEGER},
+            #{refreshTokenValidity,jdbcType=INTEGER},
+            #{additionalInformation,jdbcType=VARCHAR},
+            #{autoapprove,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.auth.service.web.model.po.OauthClientDetailsPO">
+        UPDATE auth_oauth_client_details
+        <set>
+            <if test="resourceIds != null">
+                resource_ids = #{resourceIds,jdbcType=VARCHAR},
+            </if>
+            <if test="clientSecret != null">
+                client_secret = #{clientSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="scope != null">
+                `scope` = #{scope,jdbcType=VARCHAR},
+            </if>
+            <if test="authorizedGrantTypes != null">
+                authorized_grant_types = #{authorizedGrantTypes,jdbcType=VARCHAR},
+            </if>
+            <if test="webServerRedirectUri != null">
+                web_server_redirect_uri = #{webServerRedirectUri,jdbcType=VARCHAR},
+            </if>
+            <if test="authorities != null">
+                authorities = #{authorities,jdbcType=VARCHAR},
+            </if>
+            <if test="accessTokenValidity != null">
+                access_token_validity = #{accessTokenValidity,jdbcType=INTEGER},
+            </if>
+            <if test="refreshTokenValidity != null">
+                refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER},
+            </if>
+            <if test="additionalInformation != null">
+                additional_information = #{additionalInformation,jdbcType=VARCHAR},
+            </if>
+            <if test="autoapprove != null">
+                autoapprove = #{autoapprove,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE client_id = #{clientId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="queryByID" parameterType="String" resultType="com.auth.service.web.model.dto.OauthClientDetailsDetail">
+        SELECT client_id AS clientId,
+               resource_ids AS resourceIds,
+               client_secret AS clientSecret,
+               `scope` AS scope,
+               authorized_grant_types AS authorizedGrantTypes,
+               web_server_redirect_uri AS webServerRedirectUri,
+               authorities AS authorities,
+               access_token_validity AS accessTokenValidity,
+               refresh_token_validity AS refreshTokenValidity,
+               additional_information AS additionalInformation,
+               autoapprove AS autoapprove
+          FROM auth_oauth_client_details
+         WHERE client_id = #{clientId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="list" resultType="com.auth.service.web.model.dto.OauthClientDetailsBrief">
+        SELECT client_id AS clientId,
+               resource_ids AS resourceIds,
+               client_secret AS clientSecret,
+               `scope` AS scope,
+               authorized_grant_types AS authorizedGrantTypes,
+               web_server_redirect_uri AS webServerRedirectUri,
+               authorities AS authorities,
+               access_token_validity AS accessTokenValidity,
+               refresh_token_validity AS refreshTokenValidity,
+               additional_information AS additionalInformation,
+               autoapprove AS autoapprove
+          FROM auth_oauth_client_details
+    </select>
+</mapper>

@@ -1,0 +1,78 @@
+server:
+  port: 25000
+  tomcat:
+    uri-encoding: UTF-8
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+
+logging:
+  level:
+    org.springframework: debug
+    com.auth.client.web.dao: debug
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.2.129:3306/zimocloud?useUnicode=true&character_set_server=utf8mb4
+    username: root
+    password: 123456
+    hikari:
+      maximumPoolSize: 10
+      minimumIdle: 2
+      idleTimeout: 60000
+      connectionTimeout: 3000
+      maxLifetime: 180000
+  redis:
+    host: 192.168.2.129
+    port: 6379
+    password: 123456
+    database: 0
+  freemarker:
+    allow-request-override: false
+    allow-session-override: false
+    cache: true
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: true
+    prefer-file-system-access: true
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+    request-context-attribute: request
+
+# spring security 配置
+security:
+  oauth2:
+    client:
+      client-id: admin
+      client-secret: admin
+      scope: server
+    resource:
+      loadBalanced: true
+      token-info-uri: http://localhost:24000/oauth/check_token
+    # 通用放行URL，服务个性化，请在对应配置文件覆盖
+    ignore:
+      urls:
+        - /v2/api-docs
+        - /actuator/**

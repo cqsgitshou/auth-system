@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.auth.service.web.dao.AuthUsersMapper">
+
+    <insert id="insert" parameterType="com.auth.service.web.model.po.AuthUsersPO" keyProperty="userId" useGeneratedKeys="true">
+        INSERT INTO auth_users
+            (username,`password`,salt,phone,
+             avatar,dept_id,create_time,update_time,lock_flag,
+             del_flag)
+        VALUES (
+            #{username,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            #{salt,jdbcType=VARCHAR},
+            #{phone,jdbcType=VARCHAR},
+            #{avatar,jdbcType=VARCHAR},
+            #{deptId,jdbcType=INTEGER},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{lockFlag,jdbcType=CHAR},
+            #{delFlag,jdbcType=CHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.auth.service.web.model.po.AuthUsersPO">
+        UPDATE auth_users
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lockFlag != null">
+                lock_flag = #{lockFlag,jdbcType=CHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+        </set>
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <select id="queryByID" parameterType="Integer" resultType="com.auth.service.web.model.dto.AuthUsersDetail">
+        SELECT user_id AS userId,
+               username AS username,
+               `password` AS password,
+               salt AS salt,
+               phone AS phone,
+               avatar AS avatar,
+               dept_id AS deptId,
+               create_time AS createTime,
+               update_time AS updateTime,
+               lock_flag AS lockFlag,
+               del_flag AS delFlag
+          FROM auth_users
+         WHERE user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="list" resultType="com.auth.service.web.model.dto.AuthUsersBrief">
+        SELECT user_id AS userId,
+               username AS username,
+               `password` AS password,
+               salt AS salt,
+               phone AS phone,
+               avatar AS avatar,
+               dept_id AS deptId,
+               create_time AS createTime,
+               update_time AS updateTime,
+               lock_flag AS lockFlag,
+               del_flag AS delFlag
+          FROM auth_users
+    </select>
+</mapper>
