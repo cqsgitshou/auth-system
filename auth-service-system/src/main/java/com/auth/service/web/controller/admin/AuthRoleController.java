@@ -2,10 +2,7 @@ package com.auth.service.web.controller.admin;
 
 import com.auth.commons.global.model.dto.Result;
 import com.auth.service.web.model.param.AuthRoleInsert;
-import com.auth.service.web.model.param.AuthUseRoleInsert;
-import com.auth.service.web.model.param.OauthClientDetailsInsert;
 import com.auth.service.web.service.AuthRoleService;
-import com.auth.service.web.service.OauthClientDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,4 +31,6 @@ public class AuthRoleController {
 		authRoleService.insert(authRoleInsert);
 		return Result.success();
 	}
+
+
 }

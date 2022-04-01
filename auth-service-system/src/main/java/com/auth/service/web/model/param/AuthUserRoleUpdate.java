@@ -7,10 +7,10 @@ import lombok.Setter;
  * 用户角色表修改
  *
  * @author : chenqs
- * @date: 2022-03-08 15:34:30
+ * @date: 2022-04-01 13:42:09
  **/
 @Getter
 @Setter
-public class AuthUseRoleUpdate {
+public class AuthUserRoleUpdate {
 
 }

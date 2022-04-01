@@ -12,4 +12,6 @@ import com.auth.service.web.model.param.AuthUsersInsert;
  */
 public interface AuthRoleService {
 	Result insert(AuthRoleInsert authRoleInsert);
+
+	void test(int i);
 }

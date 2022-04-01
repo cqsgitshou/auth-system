@@ -8,11 +8,11 @@ import lombok.Setter;
  * 用户角色表查询
  *
  * @author : chenqs
- * @date: 2022-03-08 15:34:30
+ * @date: 2022-04-01 13:42:09
  **/
 @Getter
 @Setter
-public class AuthUseRoleQuery extends BasePage {
+public class AuthUserRoleQuery extends BasePage {
 
     /**
      * 查询关键字
