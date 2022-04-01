@@ -2,10 +2,8 @@ spring:
   application:
     name: auth-client-system
     alias: authtest
-
   profiles:
     active: dev
-
   cloud:
     nacos:
       config:
@@ -15,3 +13,5 @@ spring:
         namespace: ${spring.profiles.active}
         username: zimocloud
         password: Zimocloud123
+
+
