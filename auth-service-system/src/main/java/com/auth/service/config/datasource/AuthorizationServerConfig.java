@@ -90,7 +90,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				 .userDetailsService(userDetailsService)
 				.authenticationManager(authenticationManager)
 				.reuseRefreshTokens(false)
-				.pathMapping("/oauth/confirm_access", "/token/confirm_access");
+				 // 确认授权页面
+				.pathMapping("/oauth/confirm_access", "/token/confirm_access")
+		// 认证服务异常处理
+		         .exceptionTranslator(new AuthWebResponseExceptionTranslator()); // // 设置自定义的异常解析器
 
 	}
 	@Bean
