@@ -8,10 +8,10 @@ spring:
     nacos:
       config:
         server-addr: 192.168.2.129:8847
-        group: zimocloud
+        group: cloud
         file-extension: yaml
         namespace: ${spring.profiles.active}
-        username: zimocloud
-        password: Zimocloud123
+        username: cloud
+        password: cloud
 
 
